@@ -9,6 +9,6 @@ class debits extends Model
 {
     use HasFactory;
     protected $table = 'debit';
-    protected $fillable = ['user_id', '', 'category_id',
+    protected $fillable = ['user_id', 'category_id',
  'nominal' , 'description' , 'debit_date'];
 }
