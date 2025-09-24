@@ -10,8 +10,8 @@
 
             <!-- Name -->
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-medium mb-2" for="name">Name</label>
-                <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
+                <label class="block text-gray-700 text-sm font-medium mb-2" for="username">Name</label>
+                <input id="username" type="text" name="username" value="{{ old('username') }}" required autofocus
                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
             </div>
 
