@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\account;
+namespace App\Http\Controllers;
 
-use App\Debit;
+use App\Model\Debits;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

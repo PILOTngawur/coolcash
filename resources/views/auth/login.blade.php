@@ -1,6 +1,6 @@
-@extends('layouts.app')
-
-@section('content')
+@extends('layouts.auth')
+    
+    @section('content')
 <div class="flex items-center justify-center min-h-screen bg-blue-100">
     <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
         <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">Login to CoolCash</h2>
