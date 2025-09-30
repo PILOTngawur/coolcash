@@ -9,5 +9,5 @@ use Illuminate\Support\Facades\DB;
 
 class CreditController extends Controller
 {
-   
+   //
 }

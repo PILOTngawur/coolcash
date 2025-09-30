@@ -11,17 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories_debit', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('name');
-            $table->timestamps();
-
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('RESTRICT')
-                ->onUpdate('CASCADE');
-        });
+       Schema::create('categories_debit', function (Blueprint $table) {
+    $table->id(); 
+    $table->string('name'); 
+    $table->timestamps();
+});
     }
 
     /**

@@ -11,25 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('credit', function (Blueprint $table) {
-             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('category_id');
-            $table->bigInteger('nominal');
-            $table->text('description');
-            $table->dateTime('credit_date');
-            $table->timestamps();
+        Schema::create('uang_masuk', function (Blueprint $table) {
+    $table->id();
+    $table->unsignedBigInteger('category_id');
+    $table->decimal('nominal', 15, 2);
+    $table->text('keterangan')->nullable();
+    $table->date('tanggal');
+    $table->timestamps();
 
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('RESTRICT')
-                ->onUpdate('CASCADE');
+    $table->foreign('category_id')
+          ->references('id')
+          ->on('categories_out')
+          ->onDelete('cascade');
+});
 
-            $table->foreign('category_id')
-                ->references('id')->on('categories_credit')
-                ->onDelete('RESTRICT')
-                ->onUpdate('CASCADE');
-        });
     }
 
     /**
