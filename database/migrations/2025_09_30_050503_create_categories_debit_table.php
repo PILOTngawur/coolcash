@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories_credit', function (Blueprint $table) {
+        Schema::create('categories_debit', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('name');
@@ -21,6 +21,7 @@ return new class extends Migration
                 ->references('id')->on('users')
                 ->onDelete('RESTRICT')
                 ->onUpdate('CASCADE');
+
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories_credit');
+        Schema::dropIfExists('categories_debit');
     }
 };
