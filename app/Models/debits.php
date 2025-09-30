@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class debits extends Model
 {
-    use HasFactory;
-    protected $table = 'debit';
-    protected $fillable = ['user_id', 'category_id',
- 'nominal' , 'description' , 'debit_date'];
+     protected $table = 'debits';
+    protected $fillable = ['category_id', 'nominal', 'keterangan', 'tanggal'];
+
+    public function category()
+    {
+        return $this->belongsTo(CategoriesDebits::class, 'category_id');
+    }
 }

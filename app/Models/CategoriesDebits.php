@@ -9,7 +9,10 @@ class CategoriesDebits extends Model
 {
     use HasFactory;
     protected $table = 'categories_debit';
-    protected $fillable = [
-        'user_id', 'name'
-    ];
+    protected $fillable = ['name'];
+
+    public function debits()
+    {
+        return $this->hasMany(Debit::class, 'category_id');
+    }
 }
