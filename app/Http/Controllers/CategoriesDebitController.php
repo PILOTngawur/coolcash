@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoriesDebitController extends Controller
 {
-  public function index()
-{
-    $categories = CategoriesDebit::all();
-    return view('categories_debit.index', compact('categories'));
-}
 
     public function store(Request $request)
     {
@@ -44,4 +39,15 @@ class CategoriesDebitController extends Controller
 
         return response()->json(['message' => 'Kategori berhasil dihapus']);
     }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        return view('account.categories_debit.index');
+    }
+
 }
