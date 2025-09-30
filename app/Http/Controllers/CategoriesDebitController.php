@@ -8,5 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoriesDebitController extends Controller
 {
-  
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        return view('account.categories_debit.index');
+    }
+
 }
