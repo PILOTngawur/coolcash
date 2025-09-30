@@ -1,10 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoriesDebitController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
-
 
 Route::get('/', function () {
     return view('landing'); // nanti bikin file landing.blade.php
@@ -19,3 +18,4 @@ Route::post('/logout', function () {
 
 Auth::routes();
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/categories_debit', [CategoriesDebitController::class, 'index'])->name('categories_debit');
