@@ -61,7 +61,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6 text-center mt-auto">
+    <footer class="bg-gray-800 text-white py-2 text-center mt-auto">
         <p>&copy; {{ date('Y') }} CoolCash. Semua hak dilindungi.</p>
     </footer>
 

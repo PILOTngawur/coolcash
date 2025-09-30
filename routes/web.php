@@ -18,7 +18,4 @@ Route::post('/logout', function () {
 })->name('logout');
 
 Auth::routes();
-
-//Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-//Route::get('/home', [HomeController::class, 'index'])->name('home');
