@@ -5,13 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class debits extends Model
+class Debits extends Model
 {
-     protected $table = 'debits';
-    protected $fillable = ['category_id', 'nominal', 'keterangan', 'tanggal'];
+    /**
+     * @var string
+     */
+    protected $table = 'debit';
 
-    public function category()
-    {
-        return $this->belongsTo(CategoriesDebits::class, 'category_id');
-    }
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'user_id', 'category_id', 'nominal', 'description', 'debit_date'
+    ];
 }
+

@@ -36,8 +36,8 @@
                :class="{ 'rotate-180': open }"></i>
         </button>
         <ul x-show="open" x-transition class="pl-6 mt-2 space-y-1 text-gray-500">
-            <li><a href="{{ route('categories_debit') }}" class="block hover:text-green-500">Kategori</a></li>
-            <li><a href="#" class="block hover:text-green-500">Uang Keluar</a></li>
+            <li><a href="{{ route('categories_debit.index') }}" class="block hover:text-green-500">Kategori</a></li>
+            <li><a href="{{ route('debit.index') }}" class="block hover:text-green-500">Uang Keluar</a></li>
         </ul>
     </li>
 

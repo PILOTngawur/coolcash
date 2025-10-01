@@ -21,5 +21,7 @@ Auth::routes();
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
-Route::get('/categories_debit', [CategoriesDebitController::class, 'index'])->name('categories_debit');
+Route::resource('account/categories_debit', CategoriesDebitController::class);
+Route::resource('account/debit', DebitController::class);
+
 
