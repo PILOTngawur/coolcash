@@ -12,14 +12,17 @@
                 <i class="fa fa-plus"></i> Tambah
             </a>
 
-            <div class="flex w-full md:w-2/3">
-                <input type="text" 
-                       placeholder="Cari Berdasarkan Kategori"
-                       class="flex-1 border border-gray-300 px-4 py-2 rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r">
-                    <i class="fa fa-search"></i> Cari
-                </button>
-            </div>
+            <form action="{{ route('categories_credit.index') }}" method="GET" class="flex">
+            <input type="text" 
+               name="search" 
+               class="flex-1 border rounded-l px-3 py-2 focus:outline-none"
+               placeholder="cari berdasarkan kategori"
+               value="{{ request('search') }}">
+        <button type="submit" 
+                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-r">
+            <i class="fas fa-search mr-1"></i> Cari
+        </button>
+    </form>
         </div>
 
         <!-- tabel daftar debit -->
@@ -31,39 +34,41 @@
                         <th class="py-2 px-3">KATEGORI</th>
                         <th class="py-2 px-3">NOMINAL</th>
                         <th class="py-2 px-3">KETERANGAN</th>
-                        <th class="py-2 px-3">TANGGAL</th>
+                        <th class="py-2 px-2">TANGGAL</th>
                         <th class="py-2 px-3">AKSI</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    @forelse($debit as $index => $item)
-                    <tr class="border-b hover:bg-gray-50 text-center">
-                        <td class="py-2 px-3">{{ $index + $debit->firstItem() }}</td>
-                        <td class="py-2 px-3">{{ $item->name }}</td>
-                        <td class="py-2 px-3">Rp. {{ number_format($item->nominal, 0, ',', '.') }}</td>
-                        <td class="py-2 px-3">{{ $item->description }}</td>
-                        <td class="py-2 px-3">{{ $item->debit_date }}</td>
-                        <td class="py-2 px-3 flex justify-center gap-2">
-                            <a href="{{ route('debit.edit', $item->id) }}"
-                               class="text-blue-600 hover:text-blue-800">
-                               <i class="fa fa-edit"></i>
-                            </a>
-                            <form action="{{ route('debit.destroy', $item->id) }}" method="POST" 
-                                  onsubmit="return confirm('Yakin hapus data ini?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-800">
+                @forelse ($debit as $index => $item)
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 border text-center">{{ $index + $debit->firstItem() }}</td>
+                    <td class="px-4 py-2 border">{{ $item->name }}</td>
+                    <td class="px-4 py-2 border">Rp {{ number_format($item->nominal, 0, ',', '.') }}</td>
+                    <td class="px-4 py-2 border">{{ $item->description }}</td>
+                    <td class="px-4 py-2 border">{{ $item->debit_date }}</td>
+                    <td class="px-4 py-2 border text-center space-x-2">
+                        <a href="{{ route('debit.edit', $item->id) }}" 
+                        class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg">
+                                <i class="fa fa-pencil-alt"></i></a>
+                        <form action="{{ route('debit.destroy', $item->id) }}" 
+                              method="POST" 
+                              class="inline-block"
+                              onsubmit="return confirm('Hapus data ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg">
                                     <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="6" class="text-center py-4 text-gray-500">Belum ada data</td>
-                    </tr>
-                    @endforelse
-                </tbody>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="6" class="text-center px-4 py-2 border">Belum ada data</td>
+                </tr>
+                @endforelse
+            </tbody>
             </table>
         </div>
 

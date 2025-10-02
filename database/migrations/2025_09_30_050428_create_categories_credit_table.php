@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->foreign('user_id')
                 ->references('id')->on('users')
-                ->onDelete('RESTRICT')
+                ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
 
         });

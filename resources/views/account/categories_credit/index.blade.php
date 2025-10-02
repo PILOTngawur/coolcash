@@ -4,11 +4,26 @@
 <div class="bg-white shadow-md rounded-lg p-6">
     <h3 class="text-xl font-semibold mb-4">Kategori Uang Masuk</h3>
 
-    {{-- Tombol tambah --}}
-    <a href="{{ route('categories_credit.create') }}" 
-       class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mb-4 inline-block">
-        <i class="fas fa-plus mr-2"></i> Tambah
-    </a>
+    <div class="bg-white shadow-lg rounded-lg p-4">
+        <!-- Header: Button Tambah + Search -->
+        <div class="flex justify-between items-center mb-4">
+            <a href="{{ route('categories_credit.create') }}" 
+               class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                <i class="fa fa-plus-circle"></i> Tambah
+            </a>
+
+            <form action="{{ route('categories_credit.index') }}" method="GET" class="flex">
+            <input type="text" 
+               name="search" 
+               class="flex-1 border rounded-l px-3 py-2 focus:outline-none"
+               placeholder="cari berdasarkan kategori"
+               value="{{ request('search') }}">
+        <button type="submit" 
+                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-r">
+            <i class="fas fa-search mr-1"></i> Cari
+        </button>
+            </form>
+        </div>
 
     {{-- pesan sukses --}}
     @if(session('success'))
@@ -16,19 +31,6 @@
             {{ session('success') }}
         </div>
     @endif
-
-    {{-- form search --}}
-    <form method="GET" action="{{ route('categories_credit.index') }}" class="flex mb-4">
-        <input type="text" 
-               name="search" 
-               class="flex-1 border rounded-l px-3 py-2 focus:outline-none"
-               placeholder="cari berdasarkan nama kategori"
-               value="{{ request('search') }}">
-        <button type="submit" 
-                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-r">
-            <i class="fas fa-search mr-1"></i> Cari
-        </button>
-    </form>
 
     {{-- tabel --}}
     <div class="overflow-x-auto">
@@ -47,16 +49,16 @@
                    <td class="px-4 py-2 border">{{ $c->name }}</td>
                     <td class="px-4 py-2 border text-center space-x-2">
                         <a href="{{ route('categories_credit.edit', $c->id) }}" 
-                           class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded text-sm">Edit</a>
+                        class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg">
+                                <i class="fa fa-pencil-alt"></i></a>
                         <form action="{{ route('categories_credit.destroy', $c->id) }}" 
                               method="POST" 
                               class="inline-block"
                               onsubmit="return confirm('Hapus data ini?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" 
-                                    class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
-                                Hapus
+                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg">
+                                    <i class="fa fa-trash"></i>
                             </button>
                         </form>
                     </td>

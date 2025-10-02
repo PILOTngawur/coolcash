@@ -12,14 +12,17 @@
                 <i class="fa fa-plus-circle"></i> Tambah
             </a>
 
-            <form action="" method="GET" class="flex">
-                <input type="text" name="q" placeholder="Cari berdasarkan kategori" 
-                       class="border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64">
-                <button type="submit" 
-                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-lg flex items-center gap-1">
-                    <i class="fa fa-search"></i> Cari
-                </button>
-            </form>
+            <form action="{{ route('categories_credit.index') }}" method="GET" class="flex">
+            <input type="text" 
+               name="search" 
+               class="flex-1 border rounded-l px-3 py-2 focus:outline-none"
+               placeholder="cari berdasarkan kategori"
+               value="{{ request('search') }}">
+        <button type="submit" 
+                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-r">
+            <i class="fas fa-search mr-1"></i> Cari
+        </button>
+    </form>
         </div>
 
         <!-- Table -->
