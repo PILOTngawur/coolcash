@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class CategoriesDebits extends Model
 {
-    use HasFactory;
+    /**
+     * @var string
+     */
     protected $table = 'categories_debit';
-    protected $fillable = ['name'];
 
-    public function debits()
-    {
-        return $this->hasMany(Debit::class, 'category_id');
-    }
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'user_id', 'name'
+    ];
 }
