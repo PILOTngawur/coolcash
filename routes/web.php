@@ -7,10 +7,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\DebitController;
+use App\Http\Controllers\CategoriesCreditController;
+use App\Http\Controllers\CreditController;
 
 
 Route::get('/', function () {
-    return view('landing'); // nanti bikin file landing.blade.php
+    return view('landing'); 
 });
 
 Route::post('/logout', function () {
@@ -23,6 +25,8 @@ Route::post('/logout', function () {
 Auth::routes();
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+
+
 //Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
@@ -30,8 +34,9 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index
 Route::get('/password/edit', [PasswordController::class, 'edit'])->name('password.edit');
 Route::post('/password/update', [PasswordController::class, 'update'])->name('password.update');
 
-
 Route::resource('account/categories_debit', CategoriesDebitController::class);
 Route::resource('account/debit', DebitController::class);
 
-
+// Kategori & transaksi Uang Masuk
+Route::resource('account/categories_credit', CategoriesCreditController::class);
+Route::resource('account/credit', CreditController::class);

@@ -7,6 +7,9 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- Tambahin ini biar responsive di HP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>CoolCash</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
@@ -18,16 +21,16 @@
     <div class="flex flex-1">
         <!-- Sidebar -->
         <div
-            class="fixed top-0 left-0 w-64 h-screen bg-white shadow-md transform transition-transform duration-300 z-50"
+            class="fixed top-0 left-0 w-64 h-screen bg-white shadow-md transform transition-transform duration-300 ease-in-out z-50"
             :class="open ? 'translate-x-0' : '-translate-x-full'">
             @include('layouts.sidebar')
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 transition-all duration-200" :class="open ? 'ml-64' : 'ml-0'">
+        <div class="flex-1 transition-all duration-200 ease-in-out" :class="open ? 'ml-64' : 'ml-0'">
             @include('layouts.navbar')
 
-            <main class="p-6 min-h-[calc(100vh-4rem-3rem)]">
+            <main class="p-6 min-h-screen">
                 @yield('content')
             </main>
         </div>
