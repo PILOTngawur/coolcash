@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PasswordController;
 
 
 Route::get('/', function () {
@@ -22,3 +24,9 @@ Auth::routes();
 //Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 //Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth'])->group(function () {
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');});
+
+Route::get('/password/edit', [PasswordController::class, 'edit'])->name('password.edit');
+Route::post('/password/update', [PasswordController::class, 'update'])->name('password.update');
