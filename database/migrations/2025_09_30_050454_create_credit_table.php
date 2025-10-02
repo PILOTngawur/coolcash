@@ -27,7 +27,7 @@ return new class extends Migration
 
             $table->foreign('category_id')
                 ->references('id')->on('categories_credit')
-                ->onDelete('RESTRICT')
+                ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
 
         });
