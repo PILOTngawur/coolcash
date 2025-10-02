@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DebitController;
+use App\Http\Controllers\CategoriesCreditController;
+use App\Http\Controllers\CreditController;
 
 Route::get('/', function () {
     return view('landing'); // nanti bikin file landing.blade.php
@@ -20,8 +22,10 @@ Route::post('/logout', function () {
 Auth::routes();
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-
+// Kategori & transaksi Uang Keluar
 Route::resource('account/categories_debit', CategoriesDebitController::class);
 Route::resource('account/debit', DebitController::class);
 
-
+// Kategori & transaksi Uang Masuk
+Route::resource('account/categories_credit', CategoriesCreditController::class);
+Route::resource('account/credit', CreditController::class);
