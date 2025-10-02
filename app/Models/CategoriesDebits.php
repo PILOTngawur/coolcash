@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class CategoriesDebits extends Model
 {
-    use HasFactory;
+    /**
+     * @var string
+     */
     protected $table = 'categories_debit';
+
+    /**
+     * @var array
+     */
     protected $fillable = [
         'user_id', 'name'
     ];
