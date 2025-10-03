@@ -26,14 +26,11 @@ Auth::routes();
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
-
-//Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-Route::middleware(['auth'])->group(function () {
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');});
+Route::resource('account/profile', ProfileController::class);
 Route::get('/password/edit', [PasswordController::class, 'edit'])->name('password.edit');
 Route::post('/password/update', [PasswordController::class, 'update'])->name('password.update');
 
+// Kategori & transaksi Uang Keluar
 Route::resource('account/categories_debit', CategoriesDebitController::class);
 Route::resource('account/debit', DebitController::class);
 

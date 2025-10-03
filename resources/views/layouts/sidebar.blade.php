@@ -49,7 +49,7 @@
                     <a href="{{ route('credit.index') }}"
                        class="block hover:text-green-500
                        {{ request()->routeIs('credit.*') ? 'text-green-600 font-bold' : '' }}">
-                        Uang Masuk
+                        Catat Uang Masuk
                     </a>
                 </li>
             </ul>
@@ -90,7 +90,7 @@
                     <a href="{{ route('debit.index') }}"
                        class="block hover:text-green-500
                        {{ request()->routeIs('debit.*') ? 'text-green-600 font-bold' : '' }}">
-                        Uang Keluar
+                        Catat Uang Keluar
                     </a>
                 </li>
             </ul>
