@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('credit', function (Blueprint $table) {
-             $table->bigIncrements('id');
+        Schema::create('debit', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
             $table->bigInteger('nominal');
             $table->text('description');
-            $table->dateTime('credit_date');
+            $table->dateTime('debit_date');
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -26,9 +26,10 @@ return new class extends Migration
                 ->onUpdate('CASCADE');
 
             $table->foreign('category_id')
-                ->references('id')->on('categories_credit')
-                ->onDelete('RESTRICT')
+                ->references('id')->on('categories_debit')
+                ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
+
         });
     }
 
@@ -37,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('credit');
+        Schema::dropIfExists('debit');
     }
 };

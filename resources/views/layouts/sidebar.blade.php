@@ -11,7 +11,7 @@
         </a>
     </li>
 
-    <!-- Debit -->
+    <!-- Credit -->
     <li x-data="{ open: false }">
         <button @click="open = !open" class="flex items-center justify-between w-full hover:text-green-500">
             <span class="flex items-center space-x-2">
@@ -26,7 +26,7 @@
         </ul>
     </li>
 
-    <!-- Credit -->
+    <!-- Debit -->
     <li x-data="{ open: false }">
         <button @click="open = !open" class="flex items-center justify-between w-full hover:text-green-500">
             <span class="flex items-center space-x-2">
@@ -36,8 +36,8 @@
                :class="{ 'rotate-180': open }"></i>
         </button>
         <ul x-show="open" x-transition class="pl-6 mt-2 space-y-1 text-gray-500">
-            <li><a href="#" class="block hover:text-green-500">Kategori</a></li>
-            <li><a href="#" class="block hover:text-green-500">Uang Keluar</a></li>
+            <li><a href="{{ route('categories_debit.index') }}" class="block hover:text-green-500">Kategori</a></li>
+            <li><a href="{{ route('debit.index') }}" class="block hover:text-green-500">Uang Keluar</a></li>
         </ul>
     </li>
 

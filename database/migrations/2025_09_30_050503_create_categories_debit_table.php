@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('debit', function (Blueprint $table) {
+        Schema::create('categories_debit', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('category_id');
-            $table->bigInteger('nominal');
-            $table->text('description');
-            $table->dateTime('debit_date');
+            $table->string('name');
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -25,10 +22,6 @@ return new class extends Migration
                 ->onDelete('RESTRICT')
                 ->onUpdate('CASCADE');
 
-            $table->foreign('category_id')
-                ->references('id')->on('categories_debit')
-                ->onDelete('RESTRICT')
-                ->onUpdate('CASCADE');
         });
     }
 
@@ -37,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('debit');
+        Schema::dropIfExists('categories_debit');
     }
 };
