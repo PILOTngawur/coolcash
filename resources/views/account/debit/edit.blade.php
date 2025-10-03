@@ -2,7 +2,19 @@
 
 @section('content')
 <div class="p-6 max-w-lg mx-auto bg-white shadow rounded-lg">
-    <h1 class="text-xl font-bold mb-4">Edit Uang Masuk</h1>
+    <h1 class="text-xl font-bold mb-4">Edit Uang Keluar</h1>
+
+    @if ($errors->any())
+    <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+        <strong>Ups! Ada kesalahan:</strong>
+        <ul class="mt-2 list-disc list-inside">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 
     <form action="{{ route('debit.update', $debit->id) }}" method="POST" class="space-y-4">
         @csrf
@@ -36,8 +48,8 @@
         </div>
 
         <div class="flex justify-end gap-2">
-            <a href="{{ route('debit.index') }}" class="px-4 py-2 border rounded">Batal</a>
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Update</button>
+            <a href="{{ route('debit.index') }}" class="bg-red-500 hover:bg-red-600  text-white px-4 py-2 border rounded"><i class="fa-solid fa-xmark"></i> Batal</a>
+            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"><i class="fa-solid fa-check"></i> Update</button>
         </div>
     </form>
 </div>

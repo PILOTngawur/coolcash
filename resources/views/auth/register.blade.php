@@ -16,7 +16,7 @@
 
             <!-- Name -->
             <div class="mb-4">
-                <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
+                <input id="username" type="text" name="username" value="{{ old('name') }}" required autofocus
                        placeholder="Nama Lengkap"
                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
             </div>
