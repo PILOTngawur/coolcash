@@ -32,7 +32,7 @@ class DebitController extends Controller
             ->join('categories_debit', 'debit.category_id', '=', 'categories_debit.id', 'LEFT')
             ->where('debit.user_id', Auth::user()->id)
             ->orderBy('debit.created_at', 'DESC')
-            ->paginate(10);
+            ->paginate(5);
         return view('account.debit.index', compact('debit'));
     }
 
@@ -156,10 +156,10 @@ class DebitController extends Controller
         //cek apakah data berhasil disimpan
         if($update){
             //redirect dengan pesan sukses
-            return redirect()->route('account.debit.index')->with(['success' => 'Data Berhasil Diupdate!']);
+            return redirect()->route('debit.index')->with(['success' => 'Data Berhasil Diupdate!']);
         }else{
             //redirect dengan pesan error
-            return redirect()->route('account.debit.index')->with(['error' => 'Data Gagal Diupdate!']);
+            return redirect()->route('debit.index')->with(['error' => 'Data Gagal Diupdate!']);
         }
     }
 
@@ -174,13 +174,9 @@ class DebitController extends Controller
         $delete = Debits::find($id)->delete($id);
 
         if($delete){
-            return response()->json([
-                'status' => 'success'
-            ]);
+            return redirect()->route('debit.index')->with(['success' => 'Data Berhasil DiHapus!']);
         }else{
-            return response()->json([
-                'status' => 'error'
-            ]);
+            return redirect()->route('debit.index')->with(['error' => 'Data Gagal DiHapus!']);
         }
     }
 }

@@ -9,7 +9,6 @@ class CategoriesCreditController extends Controller
 {
     public function index()
     {
-        // tampilkan hanya kategori milik user yang login
         $categories = CategoriesCredit::where('user_id', auth()->id())->get();
         return view('account.categories_credit.index', compact('categories'));
     }
@@ -27,7 +26,7 @@ class CategoriesCreditController extends Controller
 
         CategoriesCredit::create([
             'name'    => $request->name,
-            'user_id' => auth()->id(), // << Wajib isi user_id
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('categories_credit.index')
@@ -50,7 +49,7 @@ class CategoriesCreditController extends Controller
 
         $category->update([
             'name'    => $request->name,
-            'user_id' => auth()->id(), // pastikan tetap milik user
+            'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('categories_credit.index')

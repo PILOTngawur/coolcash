@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" x-data>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>CoolCash</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Alpine Store buat sidebar -->
@@ -34,12 +36,36 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 transition-all duration-200 ease-in-out" 
-             :class="$store.sidebar.open ? 'ml-64' : 'ml-0'">
+        <div class="flex-1 transition-all duration-200 ease-in-out"
+            :class="$store.sidebar.open ? 'ml-64' : 'ml-0'">
             @include('layouts.navbar')
+
+            
 
             <main class="p-6 min-h-screen">
                 @yield('content')
+
+                <script>
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: "{{ session('success') }}",
+            timer: 2000,
+            showConfirmButton: false
+        })
+    @endif
+
+    @if(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "{{ session('error') }}",
+            timer: 2000,
+            showConfirmButton: false
+        })
+    @endif
+</script>
             </main>
         </div>
     </div>
@@ -49,4 +75,5 @@
     </footer>
 
 </body>
+
 </html>

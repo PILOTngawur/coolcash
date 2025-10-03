@@ -31,16 +31,16 @@
 
     <div class="overflow-x-auto">
         <table class="min-w-full border border-gray-300 rounded-lg">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="px-4 py-2 border">No</th>
-                    <th class="px-4 py-2 border">Kategori</th>
-                    <th class="px-4 py-2 border">Nominal</th>
-                    <th class="px-4 py-2 border">Keterangan</th>
-                    <th class="px-4 py-2 border">Tanggal</th>
-                    <th class="px-4 py-2 border">Aksi</th>
-                </tr>
-            </thead>
+        <thead class="bg-gray-200 text-gray-700 text-center">
+                    <tr>
+                        <th class="py-2 px-3">NO</th>
+                        <th class="py-2 px-3">KATEGORI</th>
+                        <th class="py-2 px-3">NOMINAL</th>
+                        <th class="py-2 px-3">KETERANGAN</th>
+                        <th class="py-2 px-2">TANGGAL</th>
+                        <th class="py-2 px-3">AKSI</th>
+                    </tr>
+                </thead>
             <tbody>
                 @forelse ($credits as $c)
                 <tr class="hover:bg-gray-50">
@@ -51,7 +51,7 @@
                     <td class="px-4 py-2 border">{{ $c->credit_date }}</td>
                     <td class="px-4 py-2 border text-center space-x-2">
                         <a href="{{ route('credit.edit', $c->id) }}" 
-                        class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg">
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-lg">
                                 <i class="fa fa-pencil-alt"></i></a>
                         <form action="{{ route('credit.destroy', $c->id) }}" 
                               method="POST" 
