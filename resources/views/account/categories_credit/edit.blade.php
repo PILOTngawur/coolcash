@@ -20,11 +20,10 @@
         </div>
 
         <div class="flex justify-end space-x-2">
-        <button class="btn btn-warning btn-reset bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 transition" type="reset"><i class="fa fa-redo"></i> RESET</button>
-
             <a href="{{ route('categories_credit.index') }}" 
                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">
-               <i class="fa-solid fa-xmark"></i> Batal</a>
+               <i class="fa-solid fa-xmark"></i> Batal
+            </a>
             <button type="submit" 
                 class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md">
                 <i class="fa-solid fa-check"></i> Update
@@ -33,21 +32,3 @@
     </form>
 </div>
 @endsection
-
-<script>
-        /**
-         * btn reset loader
-         */
-        $( ".btn-reset" ).click(function()
-        {
-            $( ".btn-reset" ).addClass('btn-progress');
-            if (timeoutHandler) clearTimeout(timeoutHandler);
-
-            timeoutHandler = setTimeout(function()
-            {
-                $( ".btn-reset" ).removeClass('btn-progress');
-
-            }, 500);
-        })
-
-    </script>

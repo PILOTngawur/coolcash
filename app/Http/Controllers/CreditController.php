@@ -8,90 +8,73 @@ use Illuminate\Http\Request;
 
 class CreditController extends Controller
 {
-    /**
-     * Tampilkan semua data Uang Masuk
-     */
     public function index()
     {
-        // Ambil semua data dengan relasi user & kategori
-        $credits = Credit::with('category', 'user')->latest()->get();
+        $credits = Credit::with('category')->where('user_id', auth()->id())->latest()->get();
         return view('account.credit.index', compact('credits'));
     }
 
-    /**
-     * Form tambah data Uang Masuk
-     */
     public function create()
     {
-        $categories = CategoriesCredit::all();
+        // Ambil semua kategori milik user yg login
+        $categories = CategoriesCredit::where('user_id', auth()->id())->get();
+
         return view('account.credit.create', compact('categories'));
     }
 
-    /**
-     * Simpan data baru Uang Masuk
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'nominal'     => 'required|numeric',
-            'description' => 'required|string',
-            'category_id' => 'required|exists:categories_credit,id',
             'credit_date' => 'required|date',
+            'amount'      => 'required|numeric',
+            'category_id' => 'required|exists:categories_credit,id',
         ]);
 
         Credit::create([
-            'nominal'     => $request->nominal,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
             'credit_date' => $request->credit_date,
+            'amount'      => $request->amount,
+            'category_id' => $request->category_id,
             'user_id'     => auth()->id(),
         ]);
 
-        return redirect()->route('credit.index')->with('success', 'Data Uang Masuk berhasil ditambahkan');
+        return redirect()->route('credit.index')
+            ->with('success', 'Data kredit berhasil ditambahkan!');
     }
 
-    /**
-     * Form edit data Uang Masuk
-     */
     public function edit($id)
     {
-        $credit     = Credit::findOrFail($id);
-        $categories = CategoriesCredit::all();
+        $credit = Credit::where('user_id', auth()->id())->findOrFail($id);
+        $categories = CategoriesCredit::where('user_id', auth()->id())->get();
+
         return view('account.credit.edit', compact('credit', 'categories'));
     }
 
-    /**
-     * Update data Uang Masuk
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nominal'     => 'required|numeric',
-            'description' => 'required|string',
-            'category_id' => 'required|exists:categories_credit,id',
             'credit_date' => 'required|date',
+            'amount'      => 'required|numeric',
+            'category_id' => 'required|exists:categories_credit,id',
         ]);
 
-        $credit = Credit::findOrFail($id);
+        $credit = Credit::where('user_id', auth()->id())->findOrFail($id);
+
         $credit->update([
-            'nominal'     => $request->nominal,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
             'credit_date' => $request->credit_date,
-            'user_id'     => auth()->id(),
+            'amount'      => $request->amount,
+            'category_id' => $request->category_id,
         ]);
 
-        return redirect()->route('credit.index')->with('success', 'Data Uang Masuk berhasil diupdate');
+        return redirect()->route('credit.index')
+            ->with('success', 'Data kredit berhasil diperbarui!');
     }
 
-    /**
-     * Hapus data Uang Masuk
-     */
     public function destroy($id)
     {
-        $credit = Credit::findOrFail($id);
+        $credit = Credit::where('user_id', auth()->id())->findOrFail($id);
         $credit->delete();
 
-        return redirect()->route('credit.index')->with('success', 'Data Uang Masuk berhasil dihapus');
+        return redirect()->route('credit.index')
+            ->with('success', 'Data kredit berhasil dihapus!');
     }
 }

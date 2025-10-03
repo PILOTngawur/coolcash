@@ -1,47 +1,65 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="p-6 max-w-lg mx-auto bg-white shadow rounded-lg">
-    <h1 class="text-xl font-bold mb-4">Edit Uang Masuk</h1>
+<div class="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto">
+    <h3 class="text-xl font-semibold mb-4">Edit Uang Masuk</h3>
 
     <form action="{{ route('credit.update', $credit->id) }}" method="POST" class="space-y-4">
         @csrf
         @method('PUT')
 
         <div>
-            <label class="block mb-1">Kategori</label>
-            <select name="category_id" class="w-full border px-3 py-2 rounded focus:ring">
-                @foreach($categories as $cat)
-                    <option value="{{ $cat->id }}" {{ $credit->category_id == $cat->id ? 'selected' : '' }}>
-                        {{ $cat->name }}
+            <label for="credit_date" class="block text-sm font-medium text-gray-700 mb-1">Tanggal</label>
+            <input type="date" name="credit_date" id="credit_date"
+                value="{{ old('credit_date', $credit->credit_date) }}"
+                class="w-full border-gray-300 rounded-md shadow-sm px-3 py-2" required>
+        </div>
+
+        <div>
+            <label for="category_id" class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+            <select name="category_id" id="category_id"
+                class="w-full border-gray-300 rounded-md shadow-sm px-3 py-2" required>
+                <option value="">-- Pilih Kategori --</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ $credit->category_id == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
                     </option>
                 @endforeach
             </select>
-            @error('category_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div>
-            <label class="block mb-1">Nominal</label>
-            <input type="number" name="nominal" value="{{ $credit->nominal }}" class="w-full border px-3 py-2 rounded focus:ring">
-            @error('nominal') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
+            <input type="text" name="description" id="description"
+                class="w-full border-gray-300 rounded-md shadow-sm px-3 py-2"
+                value="{{ old('description', $credit->description) }}" required>
         </div>
 
         <div>
-            <label class="block mb-1">Tanggal</label>
-            <input type="date" name="credit_date" value="{{ \Carbon\Carbon::parse($credit->credit_date)->format('Y-m-d') }}" class="w-full border px-3 py-2 rounded focus:ring">
-            @error('credit_date') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+            <label for="nominal" class="block text-sm font-medium text-gray-700 mb-1">Nominal</label>
+            <input type="number" name="nominal" id="nominal"
+                class="w-full border-gray-300 rounded-md shadow-sm px-3 py-2"
+                value="{{ old('nominal', $credit->nominal) }}" required>
         </div>
 
-        <div>
-            <label class="block mb-1">Keterangan</label>
-            <textarea name="description" class="w-full border px-3 py-2 rounded focus:ring">{{ $credit->description }}</textarea>
-            @error('description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="flex justify-end gap-2">
-            <a href="{{ route('credit.index') }}" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 border rounded"><i class="fa-solid fa-xmark"></i> Batal</a>
-            <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"><i class="fa-solid fa-check"></i> Update</button>
+        <div class="flex justify-end space-x-2">
+            <a href="{{ route('credit.index') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">Batal</a>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Update</button>
         </div>
     </form>
 </div>
+
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+@if(session('success'))
+Swal.fire({
+    icon: 'success',
+    title: 'Berhasil!',
+    text: "{{ session('success') }}",
+    showConfirmButton: false,
+    timer: 2000
+});
+@endif
+</script>
 @endsection
