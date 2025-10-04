@@ -29,7 +29,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 Route::resource('account/profile', ProfileController::class);
 Route::get('/password/edit', [PasswordController::class, 'edit'])->name('password.edit');
-Route::post('/password/update', [PasswordController::class, 'update'])->name('password.update');
+Route::post('password/update', [PasswordController::class, 'update'])->name('profile.password.update');
+
 
 // Kategori & transaksi Uang Keluar
 Route::resource('account/categories_debit', CategoriesDebitController::class);

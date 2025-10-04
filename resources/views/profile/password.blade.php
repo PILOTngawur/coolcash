@@ -10,7 +10,7 @@
         <h1 class="text-2xl font-bold tracking-wide">Ganti Kata Sandi</h1>
 
         {{-- Form ganti password --}}
-        <form action="{{ route('password.update') }}" method="POST" class="space-y-4">
+        <form action="{{ route('profile.password.update') }}" method="POST" class="space-y-4">
             @csrf
 
             <input type="password" name="current_password"
