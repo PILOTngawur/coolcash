@@ -4,10 +4,9 @@
 <div class="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto">
     <h3 class="text-xl font-semibold mb-4">Tambah Kategori Uang Masuk</h3>
 
-    {{-- Form Tambah --}}
+
     <form action="{{ route('categories_credit.store') }}" method="POST" class="space-y-4">
         @csrf
-
         <div>
             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Kategori</label>
             <input type="text" name="name" id="name"

@@ -10,7 +10,7 @@
         <div class="section-body mt-4">
             <div class="bg-white shadow rounded-lg p-6">
                 
-                {{-- Alert Error --}}
+                {{-- Error Handling --}}
                 @if ($errors->any())
                     <div class="mb-4">
                         <ul class="list-disc list-inside text-red-600">

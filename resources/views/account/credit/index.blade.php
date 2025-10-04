@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<h1 class="text-xl font-semibold mb-4 mt-6">UANG MASUK</h1>
 <div class="bg-white shadow-md rounded-lg p-6">
-    <h3 class="text-xl font-semibold mb-4">UANG MASUK</h3>
 
     <div class="flex justify-between items-center mb-4">
     <a href="{{ route('credit.create') }}" 
@@ -10,7 +10,7 @@
         <i class="fas fa-plus mr-2"></i> Tambah
     </a>
 
-    <form action="{{ route('categories_credit.index') }}" method="GET" class="flex">
+    <form action="{{ route('credit.index') }}" method="GET" class="flex">
             <input type="text" 
                name="search" 
                class="flex-1 border rounded-l px-3 py-2 focus:outline-none"
@@ -22,12 +22,6 @@
         </button>
     </form>
     </div>
-
-    @if(session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
 
     <div class="overflow-x-auto">
         <table class="min-w-full border border-gray-300 rounded-lg">
@@ -51,18 +45,20 @@
                     <td class="px-4 py-2 border">{{ $c->credit_date }}</td>
                     <td class="px-4 py-2 border text-center space-x-2">
                         <a href="{{ route('credit.edit', $c->id) }}" 
-                        class="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-lg">
-                                <i class="fa fa-pencil-alt"></i></a>
-                        <form action="{{ route('credit.destroy', $c->id) }}" 
-                              method="POST" 
-                              class="inline-block"
-                              onsubmit="return confirm('Hapus data ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg">
-                                    <i class="fa fa-trash"></i>
-                            </button>
-                        </form>
+                            class="bg-yellow-500 hover:bg-yellow-600 text-white p-2 rounded-lg inline-flex items-center justify-center">
+                            <i class="fa fa-pencil-alt"></i>
+                         </a>
+                         
+                         <form action="{{ route('credit.destroy', $c->id) }}" 
+                               method="POST" 
+                               class="inline-block delete-form">
+                             @csrf
+                             @method('DELETE')
+                             <button type="submit" 
+                                 class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg inline-flex items-center justify-center">
+                                 <i class="fa fa-trash"></i>
+                             </button>
+                         </form>
                     </td>
                 </tr>
                 @empty
@@ -72,6 +68,45 @@
                 @endforelse
             </tbody>
         </table>
+        <div class="mt-4">
+            {{ $credits->links('pagination::tailwind') }}
+        </div>
     </div>
 </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        @endif
+    
+        document.querySelectorAll('.delete-form').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+    
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: "Data ini akan dihapus permanen!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    
+    });
+</script>
