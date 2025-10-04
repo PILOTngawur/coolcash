@@ -16,30 +16,17 @@ class CategoriesDebitController extends Controller
     /**
      * Tampilkan daftar kategori debit.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = CategoriesDebits::where('user_id', auth()->id())
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-
+        $query = CategoriesDebits::where('user_id', auth()->id());
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+        $categories = $query->orderBy('created_at', 'desc')->paginate(5);
+    
         return view('account.categories_debit.index', compact('categories'));
     }
-
-    /**
-     * Fitur pencarian kategori.
-     */
-    public function search(Request $request)
-    {
-        $search = $request->q;
-
-        $categories = CategoriesDebits::where('user_id', auth()->id())
-            ->where('name', 'like', "%{$search}%")
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-
-        return view('account.categories_debit.index', compact('categories'));
-    }
-
+    
     /**
      * Form tambah kategori debit.
      */

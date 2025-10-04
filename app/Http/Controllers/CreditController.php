@@ -12,37 +12,36 @@ class CreditController extends Controller
      * Tampilkan semua data Uang Masuk
      */
     public function index(Request $request)
-{
-    $search = $request->input('search');
+    {
+        $search = $request->input('search');
 
-    // Filter hanya data milik user yang login
-    $query = Credit::with('category', 'user')
-                ->where('user_id', auth()->id())
-                ->latest();
+        // Filter hanya data milik user yang login
+        $query = Credit::with('category', 'user')
+            ->where('user_id', auth()->id())
+            ->latest();
 
-    // Jika ada kata kunci pencarian
-    if ($search) {
-        $query->where(function ($q) use ($search) {
-            $q->where('description', 'like', "%{$search}%")
-              ->orWhereHas('category', function ($q2) use ($search) {
-                  $q2->where('name', 'like', "%{$search}%");
-              })
-              ->orWhere('nominal', 'like', "%{$search}%");
-        });
+        // Jika ada kata kunci pencarian
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('description', 'like', "%{$search}%")
+                    ->orWhereHas('category', function ($q2) use ($search) {
+                        $q2->where('name', 'like', "%{$search}%");
+                    })
+                    ->orWhere('nominal', 'like', "%{$search}%");
+            });
+        }
+
+        $credits = $query->paginate(5);
+        $credits->appends(['search' => $search]);
+        return view('account.credit.index', compact('credits', 'search'));
     }
-
-    $credits = $query->paginate(5);
-    $credits->appends(['search' => $search]);
-
-    return view('account.credit.index', compact('credits', 'search'));
-}
 
     /**
      * Form tambah data Uang Masuk
      */
     public function create()
     {
-        $categories = CategoriesCredit::all();
+        $categories = CategoriesCredit::where('user_id', auth()->id())->get();
         return view('account.credit.create', compact('categories'));
     }
 
@@ -75,7 +74,7 @@ class CreditController extends Controller
     public function edit($id)
     {
         $credit     = Credit::findOrFail($id);
-        $categories = CategoriesCredit::all();
+        $categories = CategoriesCredit::where('user_id', auth()->id())->get();
         return view('account.credit.edit', compact('credit', 'categories'));
     }
 

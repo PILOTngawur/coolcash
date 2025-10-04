@@ -32,14 +32,21 @@
             @error('category_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
+        {{-- Nominal --}}
         <div>
-            <label class="block mb-1">Nominal</label>
-            <input type="text" name="nominal" value="{{ $debit->nominal }}" class="w-full border px-3 py-2 rounded focus:ring">
+            <label class="block text-sm font-medium mb-1">Nominal</label>
+            <input type="text" name="nominal" id="nominal" value="{{ $debit->nominal }}"
+                class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                placeholder="Rp 0">
+            @error('nominal')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
         </div>
 
         <div>
             <label class="block mb-1">Tanggal</label>
-            <input type="date" name="debit_date" value="{{ $debit->debit_date }}" class="w-full border px-3 py-2 rounded focus:ring">
+            <input type="date" name="debit_date" value="{{ \Carbon\Carbon::parse($debit->credit_date)->format('Y-m-d') }}" class="w-full border px-3 py-2 rounded focus:ring">
+            @error('debit_date') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <div>
@@ -54,3 +61,26 @@
     </form>
 </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const nominalInput = document.getElementById('nominal');
+
+        nominalInput.addEventListener('input', function(e) {
+            // Ambil angka murni (hapus selain digit)
+            let value = this.value.replace(/[^0-9]/g, '');
+            if (value) {
+                // Format ke bentuk rupiah (Rp 20.000)
+                this.value = 'Rp ' + Number(value).toLocaleString('id-ID');
+            } else {
+                this.value = '';
+            }
+        });
+
+        // Saat hapus "Rp" dan titik agar tersisa angka saja
+        nominalInput.form?.addEventListener('submit', function() {
+            nominalInput.value = nominalInput.value
+                .replace(/[^0-9]/g, '');
+        });
+    });
+</script>

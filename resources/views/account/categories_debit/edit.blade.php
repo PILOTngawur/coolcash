@@ -5,7 +5,7 @@
     <h3 class="text-xl font-semibold mb-4">Edit Kategori Uang Keluar</h3>
 
     {{-- Form Edit --}}
-    <form action="{{ route('categories_debit.update', $categoriesDebit->id) }}" method="POST" class="space-y-4">
+    <form action="{{ route('categories_debit.update', $category->id) }}" method="POST" class="space-y-4">
         @csrf
         @method('PUT')
 
@@ -13,7 +13,7 @@
             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Kategori</label>
             <input type="text" name="name" id="name"
                    class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2"
-                   value="{{ old('name', $categoriesDebit->name) }}" required>
+                   value="{{ old('name', $category->name) }}" required>
             @error('name')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
