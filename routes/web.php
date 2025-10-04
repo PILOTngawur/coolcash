@@ -32,6 +32,7 @@ Route::post('/password/update', [PasswordController::class, 'update'])->name('pa
 
 // Kategori & transaksi Uang Keluar
 Route::resource('account/categories_debit', CategoriesDebitController::class);
+Route::get('/categories_debit/search', [App\Http\Controllers\CategoriesDebitController::class, 'search'])->name('categories_debit.search');
 Route::resource('account/debit', DebitController::class);
 Route::get('/debit/search', [App\Http\Controllers\DebitController::class, 'search'])->name('debit.search');
 

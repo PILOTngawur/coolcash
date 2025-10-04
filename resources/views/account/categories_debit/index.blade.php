@@ -12,7 +12,7 @@
                 <i class="fa fa-plus-circle"></i> Tambah
             </a>
 
-            <form action="{{ route('categories_credit.index') }}" method="GET" class="flex">
+            <form action="{{ route('categories_debit.search') }}" method="GET" class="flex">
             <input type="text" 
                name="search" 
                class="flex-1 border rounded-l px-3 py-2 focus:outline-none"
