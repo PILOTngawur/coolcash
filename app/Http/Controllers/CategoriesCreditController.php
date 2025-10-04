@@ -7,9 +7,18 @@ use Illuminate\Http\Request;
 
 class CategoriesCreditController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = CategoriesCredit::where('user_id', auth()->id())->get();
+        $query = CategoriesCredit::where('user_id', auth()->id());
+
+        // Fitur Search
+        if ($request->has('search') && $request->search != '') {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        // Pagination 10 data per halaman
+        $categories = $query->orderBy('created_at', 'desc')->paginate(5);
+
         return view('account.categories_credit.index', compact('categories'));
     }
 
@@ -30,7 +39,7 @@ class CategoriesCreditController extends Controller
         ]);
 
         return redirect()->route('categories_credit.index')
-                         ->with('success', 'Kategori Uang Masuk berhasil ditambahkan');
+            ->with('success', 'Kategori Uang Masuk berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -53,7 +62,7 @@ class CategoriesCreditController extends Controller
         ]);
 
         return redirect()->route('categories_credit.index')
-                         ->with('success', 'Kategori Uang Masuk berhasil diupdate');
+            ->with('success', 'Kategori Uang Masuk berhasil diupdate');
     }
 
     public function destroy($id)
@@ -62,6 +71,6 @@ class CategoriesCreditController extends Controller
         $category->delete();
 
         return redirect()->route('categories_credit.index')
-                         ->with('success', 'Kategori Uang Masuk berhasil dihapus');
+            ->with('success', 'Kategori Uang Masuk berhasil dihapus');
     }
 }

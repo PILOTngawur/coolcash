@@ -16,7 +16,19 @@ class Debits extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'category_id', 'nominal', 'description', 'debit_date'
+        'user_id',
+        'category_id',
+        'nominal',
+        'description',
+        'debit_date'
     ];
-}
 
+    public function category()
+    {
+        return $this->belongsTo(CategoriesDebits::class, 'category_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+}

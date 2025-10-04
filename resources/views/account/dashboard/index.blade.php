@@ -25,7 +25,7 @@ const chart = new Chart(ctx, {
         labels: ['Total Saldo', 'Total Pengeluaran'],
         datasets: [{
             data: [{{ $total_saldo }}, {{ $total_pengeluaran }}],
-            backgroundColor: ['#22c55e', '#ef4444'], // hijau & merah
+            backgroundColor: ['#22c55e', '#ef4444'],
             borderColor: '#ffffff',
             borderWidth: 2
         }]
