@@ -28,7 +28,7 @@
                         <input type="text" name="name" 
                                value="{{ old('name') }}"
                                class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                               placeholder="Masukkan nama kategori...">
+                               placeholder="contoh: Belanja">
                     </div>
 
                     <div class="flex gap-2">
