@@ -12,17 +12,17 @@
                 <i class="fa fa-plus"></i> Tambah
             </a>
 
-            <form action="{{ route('debit.search') }}" method="GET" class="flex">
-                <input type="text"
-                    name="search"
-                    class="flex-1 border rounded-l px-3 py-2 focus:outline-none"
-                    placeholder="cari berdasarkan kategori"
-                    value="{{ request('search') }}">
-                <button type="submit"
+            <form action="{{ route('debit.index') }}" method="GET" class="flex">
+                <input type="text" 
+                   name="search" 
+                   class="flex-1 border rounded-l px-3 py-2 focus:outline-none"
+                   placeholder="cari berdasarkan kategori"
+                   value="{{ request('search') }}">
+            <button type="submit" 
                     class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-r">
-                    <i class="fas fa-search mr-1"></i> Cari
-                </button>
-            </form>
+                <i class="fas fa-search mr-1"></i> Cari
+            </button>
+        </form>
         </div>
 
         <!-- tabel daftar debit -->
@@ -43,7 +43,7 @@
                     @forelse ($debit as $index => $item)
                     <tr class="hover:bg-gray-50">
                         <td class="px-4 py-2 border text-center">{{ $index + $debit->firstItem() }}</td>
-                        <td class="px-4 py-2 border">{{ $item->name }}</td>
+                        <td class="px-4 py-2 border">{{ $item->category->name }}</td>
                         <td class="px-4 py-2 border">Rp {{ number_format($item->nominal, 0, ',', '.') }}</td>
                         <td class="px-4 py-2 border">{{ $item->description }}</td>
                         <td class="px-4 py-2 border">{{ $item->debit_date }}</td>

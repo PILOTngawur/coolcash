@@ -17,7 +17,7 @@
             <!-- Tanggal Awal -->
             <div>
                 <label class="block text-sm mb-1 text-gray-600">Tanggal Awal</label>
-                <input type="text" name="tanggal_awal"
+                <input type="date" name="tanggal_awal"
                     value="{{ old('tanggal_awal', $tanggal_awal ?? '') }}"
                     class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="YYYY-MM-DD">
@@ -33,7 +33,7 @@
             <!-- Tanggal Akhir -->
             <div>
                 <label class="block text-sm mb-1 text-gray-600">Tanggal Akhir</label>
-                <input type="text" name="tanggal_akhir"
+                <input type="date" name="tanggal_akhir"
                     value="{{ old('tanggal_akhir', $tanggal_akhir ?? '') }}"
                     class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="YYYY-MM-DD">
@@ -46,7 +46,7 @@
             <div>
                 <button type="submit"
                     class="w-full bg-blue-600 hover:bg-blue-700 transition-all text-white font-medium py-2.5 px-4 rounded-lg shadow-md flex items-center justify-center gap-2">
-                    <i class="fa fa-filter"></i> Filter
+                    <i class="fa fa-filter"></i> TAMPILKAN
                 </button>
             </div>
         </form>
