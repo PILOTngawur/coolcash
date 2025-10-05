@@ -18,14 +18,26 @@
             {{-- Avatar --}}
             <div class="absolute right-6 bottom-[-2.5rem]">
                 <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-lg bg-gray-100">
-                    <img src="{{ asset('img/photoprofile.png') }}" 
-                         alt="Avatar" class="w-full h-full object-cover">
+                    @if(Auth::user()->avatar)
+                        <img src="{{ asset('storage/' . Auth::user()->avatar) }}" 
+                             alt="Avatar" class="w-full h-full object-cover">
+                    @else
+                        <img src="{{ asset('img/photoprofile.png') }}" 
+                             alt="Default Avatar" class="w-full h-full object-cover">
+                    @endif
                 </div>
             </div>
         </div>
 
         {{-- Content --}}
         <div class="p-8 pt-12 text-center space-y-4">
+
+            {{-- Alert sukses --}}
+            @if(session('success'))
+                <div class="p-2 bg-green-200 text-green-800 rounded-lg">
+                    {{ session('success') }}
+                </div>
+            @endif
 
             {{-- Username --}}
             <h2 class="text-2xl font-bold text-gray-800">
@@ -38,7 +50,7 @@
                    class="w-full px-4 py-2 rounded-xl bg-gray-100 text-gray-700 focus:outline-none" 
                    readonly>
 
-            {{-- Password --}}
+            {{-- Password (dummy) --}}
             <input type="password" 
                    value="********" 
                    class="w-full px-4 py-2 rounded-xl bg-gray-100 text-gray-700 focus:outline-none" 
@@ -52,6 +64,13 @@
 
             {{-- Tombol Aksi --}}
             <div class="space-y-3 pt-4">
+
+                {{-- Tombol Edit Profile --}}
+                <a href="{{ route('profile.edit') }}" 
+                   class="block w-full py-2 rounded-xl text-center bg-gradient-to-r from-indigo-400 to-indigo-600 
+                          text-white font-semibold shadow-md hover:scale-[1.02] transition">
+                   Edit Profile
+                </a>
 
                 {{-- Tombol Logout --}}
                 <form action="{{ route('logout') }}" method="POST">
