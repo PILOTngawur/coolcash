@@ -7,63 +7,40 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        // Ambil data user yang sedang login
+        $user = Auth::user();
+        return view('profile.profile', compact('user'));
+        // Pastikan file: resources/views/account/profile.blade.php
+    }
+
+    public function edit()
+    {
+        $user = Auth::user();
+        return view('profile.edit', compact('user')); 
+        // Misalnya file: resources/views/account/profile_edit.blade.php
+    }
+
+    public function update(Request $request)
+    {
         $user = Auth::user();
 
-        // Kirim ke view profile/index.blade.php
-        return view('profile.profile', compact('user'));
-    }
+        $validated = $request->validate([
+            'username' => 'required|string|max:50',
+            'email'    => 'required|email|unique:users,email,' . $user->id,
+            'avatar'   => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        $user->username = $validated['username'];
+        $user->email = $validated['email'];
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $user->avatar = $path;
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $user->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('profile.index')->with('success', 'Profil berhasil diperbarui!');
     }
 }
