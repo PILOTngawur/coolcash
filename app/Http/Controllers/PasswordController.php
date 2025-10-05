@@ -20,7 +20,8 @@ class PasswordController extends Controller
             'current_password'      => ['required'],
             'new_password'          => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-
+        
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         // Cek password lama
@@ -31,12 +32,14 @@ class PasswordController extends Controller
         }
 
         // Update password baru
-        $user->save([
+        $user->update([
             'password' => Hash::make($request->new_password),
         ]);
 
+        // Redirect ke halaman profil dengan pesan sukses
         return redirect()
-            ->route('profile.index')
-            ->with('success', 'Password berhasil diganti.');
+        ->route('profile.index')
+        ->with('success', 'Password berhasil diganti.');
+
     }
 }
