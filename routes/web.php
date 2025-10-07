@@ -37,9 +37,6 @@ Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.e
 //route ini harus beda, harus custom agar app tidsak eror!
 Route::post('password/update', [PasswordController::class, 'update'])->name('password.custom.update');
 
-// Password
-Route::get('/password/edit', [PasswordController::class, 'edit'])->name('password.edit');
-Route::post('/password/update', [PasswordController::class, 'update'])->name('password.update');
 
 // Kategori & transaksi Uang Keluar
 Route::resource('account/categories_debit', CategoriesDebitController::class);
