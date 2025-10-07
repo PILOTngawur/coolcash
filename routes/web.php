@@ -34,6 +34,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Profile (manual, bukan resource)
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+//route ini harus beda, harus custom agar app tidsak eror!
 Route::post('password/update', [PasswordController::class, 'update'])->name('password.custom.update');
 
 // Password
