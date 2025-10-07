@@ -71,7 +71,7 @@
     </div>
 
     <footer class="text-center py-1 bg-gray-200 text-sm">
-        2025 ©CoolCash All Rights Reserved
+        2025 ©CoolCash All Rights Reserved | <b>V1.0 - Early Access</b>
     </footer>
 
 </body>

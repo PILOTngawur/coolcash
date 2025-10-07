@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="p-6 max-w-lg mx-auto bg-white shadow rounded-lg">
-        <h1 class="text-xl font-bold mb-4">Tambah Uang Masuk</h1>
+        <h1 class="text-xl font-bold mb-4">Tambah Uang Keluar</h1>
 
         <form action="{{ route('debit.store') }}" method="POST" class="space-y-4">
             @csrf
