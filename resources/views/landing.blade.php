@@ -91,13 +91,13 @@
                     <p class="flex items-center space-x-3">
                         <span class="material-icons text-green-500">mail</span>
                         <a href="mailto:coolcashmg@gmail.com" class="text-gray-600 hover:text-green-600">
-                            coolcashmg@gmail.com
+                            coolcashDev@gmail.com
                         </a>
                     </p>
                     <p class="flex items-center space-x-3">
                         <span class="material-icons text-green-500">call</span>
                         <a href="tel:+6289765434321" class="text-gray-600 hover:text-green-600">
-                            +62 897-6543-4321
+                            +62 895 - 32121 - 9504
                         </a>
                     </p>
                 </div>
@@ -107,7 +107,7 @@
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-2 text-center mt-auto">
-        <p>&copy; {{ date('Y') }} CoolCash. Semua hak dilindungi.</p>
+        <p>&copy; {{ date('Y') }} CoolCash. Semua hak dilindungi. | <b>V1.0 - Early Access</b></p>
     </footer>
 
     <!-- Google Icons -->
