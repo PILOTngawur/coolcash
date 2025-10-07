@@ -34,7 +34,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Profile (manual, bukan resource)
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+Route::post('password/update', [PasswordController::class, 'update'])->name('password.custom.update');
 
 // Password
 Route::get('/password/edit', [PasswordController::class, 'edit'])->name('password.edit');
